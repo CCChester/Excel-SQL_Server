@@ -1,0 +1,614 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using System.Data.OleDb;
+using System.IO;
+
+namespace ReadExcel
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 0;
+            //store the number of occurance
+            string sourceDirectory = @"C:\Users\T0191203\Desktop\numberoccur.xlsx";
+            var dataSet = GetDataSetFromExcelFile(sourceDirectory);
+            int[] arr = new int[1000];
+            int pos = 0;
+            foreach (DataTable thisTable in dataSet.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        int a = Convert.ToInt32(row[column]);
+                        arr[pos] = a;
+                        pos++;
+                    }
+                }
+            }
+            //for store the info.
+            string info = @"C:\Users\T0191203\Desktop\info.xlsx";
+            var dp = GetDataSetFromExcelFile(info);
+            string[] Info = new string[10000];
+            int inde = 0;
+            foreach (DataTable thisTable in dp.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        Info[inde] = a;
+                        inde++;
+                    }
+                }
+            }
+            //for store the CAD
+            string CAD = @"C:\Users\T0191203\Desktop\cad.xlsx";
+            var dc = GetDataSetFromExcelFile(CAD);
+            string[] cad = new string[10000];
+            int myint = 0;
+            foreach (DataTable thisTable in dc.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        a = a.Replace(",", "");
+                        cad[myint] = a;
+                        myint++;
+                    }
+                }
+            }
+            //for store the HOURS
+            string HOURS = @"C:\Users\T0191203\Desktop\hours.xlsx";
+            var dq = GetDataSetFromExcelFile(HOURS);
+            string[] hours = new string[10000];
+            int mypos = 0;
+            foreach (DataTable thisTable in dq.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        a = a.Replace(",", "");
+                        hours[mypos] = a;
+                        mypos++;
+                    }
+                }
+            }
+            //store the filter1
+            string FILTER1 = @"C:\Users\T0191203\Desktop\filter1.xlsx";
+            var dw = GetDataSetFromExcelFile(FILTER1);
+            string[] filter1 = new string[10000];
+            int filter1pos = 0;
+            foreach (DataTable thisTable in dw.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        filter1[filter1pos] = a;
+                        filter1pos++;
+                    }
+                }
+            }
+            //store the filter2
+            string FILTER2 = @"C:\Users\T0191203\Desktop\filter2.xlsx";
+            var dy = GetDataSetFromExcelFile(FILTER2);
+            string[] filter2 = new string[10000];
+            int filter2pos = 0;
+            foreach (DataTable thisTable in dy.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        filter2[filter2pos] = a;
+                        filter2pos++;
+                    }
+                }
+            }
+            //store the filter3
+            string FILTER3 = @"C:\Users\T0191203\Desktop\filter3.xlsx";
+            var di = GetDataSetFromExcelFile(FILTER3);
+            string[] filter3 = new string[10000];
+            int filter3pos = 0;
+            foreach (DataTable thisTable in di.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        filter3[filter3pos] = a;
+                        filter3pos++;
+                    }
+                }
+            }
+            //store the filter4
+            string FILTER4 = @"C:\Users\T0191203\Desktop\filter4.xlsx";
+            var dg = GetDataSetFromExcelFile(FILTER4);
+            string[] filter4 = new string[10000];
+            int filter4pos = 0;
+            foreach (DataTable thisTable in dg.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        filter4[filter4pos] = a;
+                        filter4pos++;
+                    }
+                }
+            }
+            //store the object
+            string Object = @"C:\Users\T0191203\Desktop\object.xlsx";
+            var dk = GetDataSetFromExcelFile(Object);
+            string[] object1 = new string[10000];
+            int objectpos = 0;
+            foreach (DataTable thisTable in dk.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        object1[objectpos] = a;
+                        objectpos++;
+                    }
+                }
+            }
+            //run the 289
+            string orin = @"C:\Users\T0191203\Desktop\tableSQL.xlsx";
+            var de = GetDataSetFromExcelFile(orin);
+            string[] less = new string[10000];
+            int lesspos = 0;
+            foreach (DataTable thisTable in de.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        if (a == "") { a = "NULL"; }
+                        less[lesspos] = a;
+                        lesspos++;
+                    }
+                }
+            }
+            //Create a column, with no duplicative things
+            string temsql = @"C:\Users\T0191203\Desktop\tableSQL.xlsx";
+            var df = GetDataSetFromExcelFile(temsql);
+            string[] temparr = new string[100000];
+            int my = 0;
+            int counted = 0;
+            foreach (DataTable thisTable in df.Tables)
+            {
+                // For each row, print the values of each column.
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        string a = Convert.ToString(row[column]);
+                        char last = a[a.Length - 1];
+                        if (counted < 36)
+                        {
+                            if (last == ':')
+                            {
+                                a = a.Remove(a.Length - 1);
+                            }
+                            temparr[my] = a;
+                        }
+                        else
+                        {
+                            if (last != ':')
+                            {
+                                a = a + ": ";
+                            }
+                            temparr[my] = a + "INFO";
+                            my++;
+                            temparr[my] = a + "CAD";
+                            my++;
+                            temparr[my] = a + "HOURS";
+                        }
+                        counted++;
+                        my++;
+                    }
+                }
+            }
+            string path3 = @"C:\Users\T0191203\Desktop\tableSQL.txt";
+            using (var tw = new StreamWriter(path3, true))
+            {
+                tw.Write("[FILTER 1][varchar](2000) NULL,");
+                tw.WriteLine();
+                tw.Write("[FILTER 2][varchar](2000) NULL,");
+                tw.WriteLine();
+                tw.Write("[FILTER 3][varchar](2000) NULL,");
+                tw.WriteLine();
+                tw.Write("[FILTER 4][varchar](2000) NULL,");
+                tw.WriteLine();
+                for (int u = 0; u < mypos; u++)
+                {
+                    if (u == (mypos - 1))
+                    {
+                        tw.WriteLine("[" + temparr[u]  + "]" + " [varchar](2000) NULL");
+                    }
+                    else
+                    {
+                        tw.WriteLine("[" + temparr[u] + "]" + " [varchar](2000) NULL,");
+                    }
+
+                }
+                tw.Close();
+            }
+            //for testing
+            Console.WriteLine(my);
+            Console.WriteLine(objectpos);
+            Console.WriteLine(pos);
+            Console.WriteLine("after remove duplicative");
+            Console.WriteLine(my);
+            Console.WriteLine(inde);
+            Console.WriteLine(myint);
+            Console.WriteLine(mypos);
+            //to input a new txt file, and then going to import to SQL server
+            string path1 = @"C:\Users\T0191203\Desktop\haha.txt";
+            using (var wr = new StreamWriter(path1, true))
+            {
+                //for the BiD INFO and PROJECT INFO
+                int control = 0;
+                int open = 0;
+                //to see when it need info, cad, hours for three that show up
+                int three = 0;
+                int extra = 2;
+                while (i < 112)
+                {
+                    wr.Write(",");
+                    three++;
+                    if (i == pos - 1)
+                    {
+                        wr.WriteLine();
+                    }
+                    int comma = 0;
+                    int sum = 0;
+                    for (int j = 0; j < i; j++)
+                    {
+                        sum = sum + arr[j];
+                    }
+                    if (control == 1 && open == 1)
+                    {
+                        wr.Write(filter1[sum]);
+                        wr.Write(",");
+                        wr.Write(filter2[sum]);
+                        wr.Write(",");
+                        wr.Write(filter3[sum]);
+                        wr.Write(",");
+                        wr.Write(filter4[sum]);
+                        wr.Write(",");
+                        comma += 4;
+                    }
+                    //print the comma
+                    //print the previous comma
+                    //must change something here
+                    //number of comma not the same with "all" and after "all"
+                    for (int z = 0; z < sum; z++)
+                    {
+                        wr.Write(",");
+                    }
+                    if (three >= 9)
+                    {
+                        for (int po = 0; po < extra; po++)
+                        {
+                            wr.Write(",");
+                        }
+                        //to add 
+                        comma = comma + extra;
+                        extra += arr[i] * 2;
+                    }
+                    int k = 0;
+                    int equal = sum;
+                    while (k < arr[i])
+                    {
+                        if (control == 0)
+                        {
+                            wr.Write(filter1[k]);
+                            wr.Write(",");
+                            wr.Write(filter2[k]);
+                            wr.Write(",");
+                            wr.Write(filter3[k]);
+                            wr.Write(",");
+                            wr.Write(filter4[k]);
+                            wr.Write(",");
+                            comma += 4;
+                            control = 1;//change the control bit
+                            open = 1;
+                        }
+                        string compare = filter1[equal];
+                        if (compare == "ALL")
+                        {
+                            wr.Write(Info[equal]);
+                            wr.Write(",");
+                            comma++;
+                        }
+                        else
+                        {
+                            wr.Write(Info[equal]);
+                            wr.Write(",");
+                            wr.Write(cad[equal]);
+                            wr.Write(",");
+                            wr.Write(hours[equal]);
+                            wr.Write(",");
+                            comma += 3;
+                        }
+                        equal++;
+                        //
+                        k++;
+                    }
+                    if (control == 0)
+                    {
+                        comma++;
+                    }
+                    else
+                    {
+                        comma = comma + sum;
+                    }
+                    while (comma < 795)
+                    {
+                        if (comma == (795 - 1))
+                        {
+                            wr.Write(",");
+                            wr.WriteLine();
+                        }
+                        else
+                        {
+                            wr.Write(",");
+                        }
+                        comma++;
+                    }
+                    i++;
+                }
+                wr.Close();
+            }
+            //begin the duplicative things
+            //store the index after no-duplicative
+            //to find where the duplicative in the non-duplicative
+            string path5 = @"C:\Users\T0191203\Desktop\second.txt";
+            using (var pr = new StreamWriter(path5, true))
+            {
+                int lesspo = lesspos;
+                int morepos = lesspos;
+                while (i < 322)
+                {
+                    pr.WriteLine("insert into  [mytemp](");
+                    pr.WriteLine("[FILTER 1],");
+                    pr.WriteLine("[FILTER 2],");
+                    pr.WriteLine("[FILTER 3],");
+                    pr.WriteLine("[FILTER 4],");
+                    for (int k = 0; k < arr[i]; k++)
+                    {
+                        if (Info[lesspo] != "NULL")
+                        {
+                            pr.Write("[");
+                            pr.Write(object1[lesspo]);
+                            if (cad[lesspo] != "NULL")
+                            {
+                                pr.Write(": INFO],");
+                            }
+                            else if (k == (arr[i] - 1))
+                            {
+                                pr.Write(": INFO])");
+                            }
+                        }
+                        if (cad[lesspo] != "NULL")
+                        {
+                            pr.Write("[");
+                            pr.Write(object1[lesspo]);
+                            if (k == (arr[i] - 1) && hours[lesspo] == "NULL")
+                            {
+                                pr.Write(": CAD])");
+                            }
+                            else
+                            {
+                                pr.Write(": CAD],");
+                            }
+                        }
+                        if (hours[lesspo] != "NULL")
+                        {
+                            pr.Write("[");
+                            pr.Write(object1[lesspo]);
+                            if (k == (arr[i] - 1))
+                            {
+                                pr.Write(": HOURS])");
+                            }
+                            else
+                            {
+                                pr.Write(": HOURS],");
+                            }
+                        }
+                        lesspo++;
+                    }
+                    pr.Write("VALUES (");
+                    pr.Write("'");
+                    pr.Write(filter1[morepos]);
+                    pr.Write("',");
+                    pr.Write("'");
+                    pr.Write(filter2[morepos]);
+                    pr.Write("',");
+                    pr.Write("'");
+                    pr.Write(filter3[morepos]);
+                    pr.Write("',");
+                    pr.Write("'");
+                    pr.Write(filter4[morepos]);
+                    pr.Write("',");
+                    for (int k = 0; k < arr[i]; k++)
+                    {
+                        if (Info[morepos] != "NULL")
+                        {
+                            pr.Write("'");
+                            pr.Write(Info[morepos]);
+                            pr.Write("'");
+                            if (cad[morepos] != "NULL" || hours[morepos] != "NULL")
+                            {
+                                pr.Write(",");
+                            }
+                            else if (k != (arr[i] - 1))
+                            {
+                                pr.Write(",");
+                            }
+                            else if (k == arr[i] - 1)
+                            {
+                                pr.Write(")");
+                            }
+                        }
+                        if (cad[morepos] != "NULL")
+                        {
+                            pr.Write("'");
+                            pr.Write(cad[morepos]);
+                            pr.Write("'");
+                            if (hours[morepos] != "NULL")
+                            {
+                                pr.Write(",");
+                            }
+                            if (k != (arr[i] - 1))
+                            {
+                                pr.Write(",");
+                            }
+                            if (k == arr[i] - 1 && hours[morepos] == "NULL")
+                            {
+                                pr.Write(")");
+                            }
+                        }
+                        if (hours[morepos] != "NULL")
+                        {
+                            pr.Write("'");
+                            pr.Write(hours[morepos]);
+                            pr.Write("'");
+                            if (k != (arr[i] - 1))
+                            {
+                                pr.Write(",");
+                            }
+                            if (k == arr[i] - 1)
+                            {
+                                pr.Write(")");
+                            }
+                        }
+                        morepos++;
+                    }
+                    i++;
+                    pr.WriteLine();
+                    pr.WriteLine();
+                }
+                pr.Close();
+            }
+            Console.ReadKey();
+        }
+        //Helper function to connect C# and Excel
+        private static string GetConnectionString(string file)
+        {
+            Dictionary<string, string> props = new Dictionary<string, string>();
+            string extension = file.Split('.').Last();
+            //if file type is "xls"
+            if (extension == "xls")
+            {
+                //Excel 2003 and Older
+                props["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+                props["Extended Properties"] = "Excel 8.0";
+            }
+            //if file type is xlsx
+            else if (extension == "xlsx")
+            {
+                //Excel 2007, 2010, 2012, 2013
+                props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
+                props["Extended Properties"] = "Excel 12.0 XML";
+            }
+            //if file type is xlsm
+            else if (extension == "xlsm")
+            {
+                props["Provider"] = "Microsoft.ACE.OLEDB.12.0;";
+                props["Extended Properties"] = "Excel 12.0 macro";
+            }
+            else
+            {
+                throw new Exception(string.Format("error file: {0}", file));
+            }
+            props["Data Source"] = file;
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> prop in props)
+            {
+                sb.Append(prop.Key);
+                sb.Append('=');
+                sb.Append(prop.Value);
+                sb.Append(';');
+            }
+            //free the dictionary
+            props = null;
+            //return back the string
+            return sb.ToString();
+        }
+        //helper-function, to open a file, and put all sheets 
+        //from excel to C# dataSet
+        private static DataSet GetDataSetFromExcelFile(string file)
+        {
+            DataSet ds = new DataSet();
+            string connectionString = GetConnectionString(file);
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                conn.Open();
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.Connection = conn;
+                // Get all Sheets from Excel File
+                DataTable dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                // Loop through all Sheets to get data
+                foreach (DataRow dr in dtSheet.Rows)
+                {
+                    string sheetName = dr["TABLE_NAME"].ToString();
+                    if (!sheetName.EndsWith("$"))
+                        continue;
+                    // Get all rows from the Sheet
+                    cmd.CommandText = "SELECT * FROM [" + sheetName + "]";
+                    DataTable dt = new DataTable();
+                    dt.TableName = sheetName;
+                    OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+                    da.Fill(dt);
+                    //add new column to store the filename
+                    ds.Tables.Add(dt);
+                }
+                //Console.WriteLine(ds.Tables[0].Columns.Count);
+                cmd = null;
+                //Close the connection
+                conn.Close();
+                //free the menmory
+                conn.Dispose();
+            }
+            //return the DataSet back
+            return ds;
+        }
+    }
+}
